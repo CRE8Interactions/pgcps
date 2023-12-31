@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_hour_logs",
+  "info": {
+    "singularName": "service-hour-log",
+    "pluralName": "service-hour-logs",
+    "displayName": "serviceHourLog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "school": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::school.school"
+    },
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "submissionDate": {
+      "type": "date"
+    },
+    "dateOfService": {
+      "type": "date",
+      "required": true
+    },
+    "serviceOrganization": {
+      "type": "string",
+      "required": true
+    },
+    "organizationContact": {
+      "type": "email",
+      "required": true
+    },
+    "hoursOfService": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "SSLpreparation": {
+      "type": "text"
+    },
+    "SSLactivity": {
+      "type": "text"
+    },
+    "SSLreflection": {
+      "type": "text"
+    },
+    "status": {
+      "type": "string",
+      "default": "pendingApproval"
+    },
+    "approvedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "approvalDate": {
+      "type": "datetime"
+    }
+  }
+}

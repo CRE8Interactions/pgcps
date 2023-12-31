@@ -1,14 +1,12 @@
 {
   "collectionName": "components_address_addresses",
   "info": {
-    "displayName": "address"
+    "displayName": "address",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "address1": {
-      "type": "string"
-    },
-    "address2": {
       "type": "string"
     },
     "city": {

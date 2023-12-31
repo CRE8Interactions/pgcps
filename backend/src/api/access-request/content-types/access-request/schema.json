@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "access_requests",
+  "info": {
+    "singularName": "access-request",
+    "pluralName": "access-requests",
+    "displayName": "accessRequest",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "requestor": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "school": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::school.school"
+    },
+    "approver": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "approvedOn": {
+      "type": "datetime"
+    },
+    "status": {
+      "type": "string",
+      "default": "pending"
+    },
+    "code": {
+      "type": "string",
+      "private": true
+    }
+  }
+}

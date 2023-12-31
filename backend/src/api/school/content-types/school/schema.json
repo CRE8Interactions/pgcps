@@ -15,11 +15,6 @@
     "name": {
       "type": "string"
     },
-    "address": {
-      "type": "component",
-      "repeatable": false,
-      "component": "address.address"
-    },
     "organization": {
       "type": "relation",
       "relation": "oneToOne",
@@ -35,6 +30,39 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "plugin::users-permissions.user"
+    },
+    "type": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "endTime": {
+      "type": "time"
+    },
+    "boeDistrict": {
+      "type": "integer"
+    },
+    "abbreviation": {
+      "type": "string"
+    },
+    "stateCode": {
+      "type": "string"
+    },
+    "locationCode": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

@@ -13,9 +13,12 @@
     "@faker-js/faker": "^8.2.0",
     "@strapi/plugin-i18n": "4.15.0",
     "@strapi/plugin-users-permissions": "4.15.0",
+    "@strapi/provider-email-nodemailer": "^4.16.0",
     "@strapi/strapi": "4.15.0",
     "moment": "^2.29.4",
-    "pg": "8.8.0"
+    "pg": "8.8.0",
+    "strapi-plugin-paper-trail": "^0.3.0",
+    "uuid": "^9.0.1"
   },
   "author": {
     "name": "A Strapi developer"

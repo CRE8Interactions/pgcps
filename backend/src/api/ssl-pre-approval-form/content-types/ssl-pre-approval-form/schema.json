@@ -1,0 +1,120 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ssl_pre_approval_forms",
+  "info": {
+    "singularName": "ssl-pre-approval-form",
+    "pluralName": "ssl-pre-approval-forms",
+    "displayName": "sslPreApprovalForm",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "paperTrail": {
+      "enabled": true
+    }
+  },
+  "attributes": {
+    "studentName": {
+      "type": "string",
+      "required": true
+    },
+    "studentNumber": {
+      "type": "string",
+      "required": true
+    },
+    "telephoneNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "requestApprovalForOrganizationAsSSL": {
+      "type": "boolean"
+    },
+    "signature": {
+      "type": "string",
+      "required": true
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "school": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::school.school"
+    },
+    "status": {
+      "type": "string",
+      "default": "pendingApproval"
+    },
+    "approver": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "organizationName": {
+      "type": "string",
+      "required": true
+    },
+    "organizationAddress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "organizationTelephone": {
+      "type": "string",
+      "required": true
+    },
+    "organizationFax": {
+      "type": "string"
+    },
+    "organizationWebsite": {
+      "type": "string"
+    },
+    "organizationEmail": {
+      "type": "email",
+      "required": true
+    },
+    "organizationContactName": {
+      "type": "string",
+      "required": true
+    },
+    "organizationContactTitle": {
+      "type": "string",
+      "required": true
+    },
+    "organizationMission": {
+      "type": "text",
+      "required": true
+    },
+    "studentActivities": {
+      "type": "text",
+      "required": true
+    },
+    "coordinatorApproved": {
+      "type": "boolean"
+    },
+    "organizationStatus": {
+      "type": "json"
+    },
+    "approvalDate": {
+      "type": "datetime"
+    }
+  }
+}

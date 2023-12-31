@@ -15,15 +15,19 @@
     "name": {
       "type": "string"
     },
-    "address": {
-      "type": "component",
-      "repeatable": false,
-      "component": "address.address"
-    },
     "schools": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::school.school"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

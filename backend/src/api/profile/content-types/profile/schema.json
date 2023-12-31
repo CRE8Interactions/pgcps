@@ -4,7 +4,8 @@
   "info": {
     "singularName": "profile",
     "pluralName": "profiles",
-    "displayName": "profile"
+    "displayName": "profile",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -27,7 +28,7 @@
       "relation": "oneToOne",
       "target": "api::school.school"
     },
-    "studentId": {
+    "studentNumber": {
       "type": "string",
       "required": true,
       "unique": true
@@ -36,6 +37,31 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
+    },
+    "grade": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "schoolMaxId": {
+      "type": "string"
+    },
+    "address": {
+      "displayName": "address",
+      "type": "component",
+      "repeatable": false,
+      "component": "mailing-address.address"
     }
   }
 }
