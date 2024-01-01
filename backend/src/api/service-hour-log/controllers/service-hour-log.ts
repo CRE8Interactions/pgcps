@@ -13,7 +13,19 @@ export default factories.createCoreController('api::service-hour-log.service-hou
   },
   async find(ctx) {
     let user = ctx.state.user;
+
+    user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        id: user.id
+      },
+      populate: {
+        school: true,
+        role: true
+      }
+    })
+
     let entries;
+
     if (user.role.name.toLowerCase() === "student") {
       let data: any;
       data = await strapi.entityService.findMany('api::service-hour-log.service-hour-log', {
@@ -27,7 +39,21 @@ export default factories.createCoreController('api::service-hour-log.service-hou
 
       entries = data.filter((entry: any) => entry.student?.email == user.email)
     } else {
-      entries = await strapi.entityService.findMany('api::service-hour-log.service-hour-log', {});
+      let data = await strapi.entityService.findMany('api::service-hour-log.service-hour-log', {
+        populate: {
+          student: {
+            populate: {
+              profile: true,
+              select: ['grade']
+            }
+          },
+          school: {
+            filters: { id: user.school.id}
+          }
+        }
+      });
+
+      entries = data.filter((entry: any) => entry?.school?.id == user?.school?.id )
     }
     return entries
   }

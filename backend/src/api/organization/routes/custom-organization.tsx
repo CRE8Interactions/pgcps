@@ -9,6 +9,11 @@ module.exports = {
       method: 'POST',
       path: '/organizations/approve-request',
       handler: 'organization.approveAccessRequest'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/approve-hour',
+      handler: 'organization.approveHours'
     }
   ]
 }

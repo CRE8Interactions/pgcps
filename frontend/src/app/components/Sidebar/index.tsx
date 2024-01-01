@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Box,
   Button,
@@ -10,6 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { useSession } from "next-auth/react"
 
 interface Props {
   onClose: Function
@@ -17,19 +20,22 @@ interface Props {
   variant: 'drawer' | 'sidebar'
 }
 
-const SidebarContent = ({ onClick }: { onClick: Function }) => (
+const SidebarContent = ({ onClick, session }: { onClick: Function, session: any }) => (
   <VStack>
     <Button as={NextLink} href="/api/auth/signout" w="100%">Sign Out</Button>
     <Button as={NextLink} href="/dashboard/home" w="100%">
       Home
     </Button>
-    <Button as={NextLink} href="/dashboard/new-service-hours" w="100%">
-      Log Service Hours
-    </Button>
+    {session && session.accounType == "student" &&
+      < Button as={NextLink} href="/dashboard/new-service-hours" w="100%">
+        Log Service Hours
+      </Button>
+    }
   </VStack>
 )
 
 const Sidebar = ({ isOpen, variant, onClose }: Props) => {
+  const { data: session, status } = useSession()
 
   return variant === 'sidebar' ? (
     <Box
@@ -41,7 +47,7 @@ const Sidebar = ({ isOpen, variant, onClose }: Props) => {
       h="100%"
       bg="#1f388f"
     >
-      <SidebarContent onClick={onClose} />
+      <SidebarContent onClick={onClose} session={session} />
     </Box>
   ) : (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>

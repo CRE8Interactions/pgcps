@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import {
   Box,
+  Button,
   Table,
   Thead,
   Tbody,
@@ -16,12 +17,13 @@ import {
   Heading,
   Center,
   Show,
-  Text
+  Text,
 } from '@chakra-ui/react'
-import Head from "next/head"
 import ServiceHoursChart from "./ServiceHoursChart"
+import ConfirmationAlert from "./alerts/ConfirmationAlert"
+import { Link } from "@chakra-ui/react"
 
-export default function ServiceHoursTable({ hours, user }) {
+export default function ServiceHoursTable({ hours, user, confirmation }) {
 
   const calculateSum = (arr: any) => {
     return arr.reduce((total: number, current: any) => {
@@ -35,8 +37,30 @@ export default function ServiceHoursTable({ hours, user }) {
 
   let hoursNeeded = (totalHours - myHours)
 
+  const [isOpen, setIsOpen] = useState(false)
+  const [onClose, setOnClose] = useState(false)
+  const [selectedHour, setSelectedHour] = useState()
+
+  const confirmApproval = (hour: any) => {
+    setSelectedHour(hour)
+    setIsOpen(true)
+  }
+
+  const submitApproval = async () => {
+    confirmation(selectedHour)
+  }
+
+  useEffect(() => {
+    if (onClose) {
+      submitApproval()
+      setIsOpen(false)
+      setOnClose(false)
+    }
+  }, [onClose])
+
   return (
     <Box>
+      <ConfirmationAlert isOpen={isOpen} setOnClose={setOnClose} setIsOpen={setIsOpen} selectedHour={selectedHour} />
       {hours && hours.length > 0 &&
         <>
           <SimpleGrid>
@@ -50,23 +74,45 @@ export default function ServiceHoursTable({ hours, user }) {
                 <Table variant='striped' colorScheme='facebook' size='sm' bg="white">
                   <Thead>
                     <Tr>
+                      {user && user.type == "counselor" &&
+                        <>
+                          <Th>Student</Th>
+                          <Th>Grade</Th>
+                        </>
+                      }
                       <Th>Date of Service</Th>
                       <Th>Organization</Th>
                       <Th>Org Contact</Th>
                       <Th isNumeric>Hours</Th>
-                      <Th>Submission Date</Th>
                       <Th>Status</Th>
+                      {user && user.type == "counselor" &&
+                        <Th></Th>
+                      }
                     </Tr>
                   </Thead>
                   <Tbody>
                     {hours && hours.map((hour: any, index: number) =>
                       <Tr key={index}>
+                        {user && user.type == "counselor" &&
+                          <>
+                            <Td>{hour.student.fullName}</Td>
+                            <Td>{hour.student?.profile.grade}</Td>
+                          </>
+                        }
                         <Td>{hour.dateOfService}</Td>
                         <Td>{hour.serviceOrganization}</Td>
-                        <Td>{hour.organizationContact}</Td>
+                        <Td>
+                          <Link href={`mailto:${hour.organizationContact}`} color='teal.500'>
+                            {hour.organizationContact}
+                          </Link>
+                        </Td>
                         <Td isNumeric>{hour.hoursOfService}</Td>
-                        <Td>{hour.submissionDate}</Td>
                         <Td>{hour.status}</Td>
+                        {user && user.type == "counselor" &&
+                          <Td>
+                            <Button size="xs" colorScheme="green" isDisabled={hour.status == "approved"} onClick={() => confirmApproval(hour)}>Approve</Button>
+                          </Td>
+                        }
                       </Tr>
                     )
                     }
@@ -100,7 +146,6 @@ export default function ServiceHoursTable({ hours, user }) {
           </Center>
         </SimpleGrid>
       }
-
     </Box>
 
   )

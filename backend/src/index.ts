@@ -121,6 +121,48 @@ export default {
           }
         })
 
+        const findProfilePermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::profile.profile.find'
+          }
+        })
+
+        const approveAccessRequestPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::organization.organization.approveAccessRequest'
+          }
+        })
+
+        const getAccessRequestPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::organization.organization.getAccessRequest'
+          }
+        })
+
+        const createSHLPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::service-hour-log.service-hour-log.create'
+          }
+        })
+
+        const findSHLPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::service-hour-log.service-hour-log.find'
+          }
+        })
+
+        const updateSHLPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::service-hour-log.service-hour-log.update'
+          }
+        })
+
+        const approveHourPermission = await strapi.db.query('plugin::users-permissions.permission').create({
+          data: {
+            action: 'api::organization.organization.approveHours'
+          }
+        })
+
         const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
           where: {
             name: 'Public',
@@ -148,7 +190,10 @@ export default {
         //     permissions: [
         //       ...publicRole.permissions,
         //       findSchoolPermission.id,
-        //       registerPermission.id
+        //       registerPermission.id,
+        //       approveAccessRequestPermission.id,
+        //       getAccessRequestPermission
+
         //     ],
         //   },
         // });

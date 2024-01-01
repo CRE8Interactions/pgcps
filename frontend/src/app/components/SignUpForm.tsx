@@ -2,6 +2,9 @@
 
 import { Field, Form, Formik } from 'formik';
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
   Button,
   SimpleGrid,
   Text,
@@ -20,6 +23,7 @@ export default function SignUpForm() {
   const { data: session, update: sessionUpdate } = useSession();
   const [schools, setSchools] = useState([])
   const [school, setSchool] = useState('')
+  const [alertMsg, setAlertMsg] = useState('')
   const emailPlaceholder = request && request === "counselor" ? "Enter @pgcps.org email" : "Enter email address"
 
   const fetchSchools = async () => {
@@ -57,13 +61,19 @@ export default function SignUpForm() {
           if (request === "student") router.push("/login?status=new-student");
           if (request === "counselor") router.push("/login?status=new-counselor");
           router.refresh();
-        } else {
-          // Bad request
+        } else if (response.status === 400) {
+          setAlertMsg(response.message)
         }
       }}
     >
       <Form>
-        <SimpleGrid columns={1}>
+        {alertMsg &&
+          <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>{alertMsg}</AlertTitle>
+          </Alert>
+        }
+        <SimpleGrid columns={1} py={3}>
           <label htmlFor="fullName" className="form-label">Full Name</label>
           <Field
             id="fullName"

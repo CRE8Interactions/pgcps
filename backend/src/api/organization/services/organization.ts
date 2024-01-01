@@ -55,5 +55,25 @@ export default factories.createCoreService('api::organization.organization', ({ 
     await strapi.service('api::utility.utility').sendMessage(user.email, 'donotreply@pgcps.org', `SPRY ${user.type} access approved`, `Your request to join ${entry.school.name} as an ${user.type} has been approved please login <a href=${process.env.CLIENT_HOST}/login>Here</a> to complete setup.`)
 
     return entry
+  },
+  async approve(id) {
+    const entry = await strapi.db.query('api::service-hour-log.service-hour-log').update({
+      where: {
+        $and: [
+          { id: id },
+          { status: 'pendingApproval'}
+        ]
+      },
+      data: {
+        status: 'approved'
+      },
+      populate: {
+        student: true
+      }
+    });
+
+    await strapi.service('api::utility.utility').sendMessage(entry.student.email, 'donotreply@pgcps.org', `SPRY service hours approved`, `Your ${entry.hoursOfService} service hours for ${entry.serviceOrganization} has been approved.`)
+
+    return entry
   }
 }));

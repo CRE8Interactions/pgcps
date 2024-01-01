@@ -35,7 +35,7 @@ export default function ServiceHoursChart({ data }: any) {
         dataLabels: {
           enabled: true,
           format: '<span style="font-size: 1.2em"><b>{point.name}</b></span><br>' +
-            '<span style="opacity: 0.6">{point.percentage:.1f} Hours</span>',
+            '<span style="opacity: 0.6">{point.y:.f} Hours</span>',
           connectorColor: 'rgba(128,128,128,0.5)'
         }
       }

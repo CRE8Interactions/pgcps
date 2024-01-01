@@ -53,5 +53,22 @@ export default factories.createCoreController('api::organization.organization', 
         message: 'No code provided',
       }
     }
+  },
+  async approveHours(ctx) {
+    const { hourId } = ctx.request.body
+    let entry = await strapi.service('api::organization.organization').approve(hourId)
+
+    if (entry) {
+        return ctx.body = {
+          status: 200,
+          message: 'Approval Successful',
+          data: entry
+        }
+      } else {
+        return ctx.body = {
+        status: 400,
+        message: 'Unable to approve request',
+      }
+    }
   }
 }));

@@ -39,15 +39,19 @@ export async function signIn({ email, password }) {
 }
 
 export async function signUp({ email, password, type, school, fullName }) {
-  const res = await axios.post(`${apiUrl}/auth/local/register`, {
-    username: email,
-    email: email,
-    password,
-    type,
-    school,
-    fullName
-  });
-  return res.data;
+  try {
+    const res = await axios.post(`${apiUrl}/auth/local/register`, {
+      username: email,
+      email: email,
+      password,
+      type,
+      school,
+      fullName
+    });
+    return res.data;
+  } catch (e) {
+    return e.response.data.error
+  }  
 }
 
 export async function getMe() {
@@ -79,5 +83,10 @@ export async function getAccessRequest(code: string) {
 
 export async function approveAccessRequest(code: string) {
   const res = await axios.post(`${apiUrl}/organizations/approve-request`, {code});
+  return res.data;
+}
+
+export async function approveHour(hourId: string) {
+  const res = await axios.post(`${apiUrl}/organizations/approve-hour`, {hourId});
   return res.data;
 }
