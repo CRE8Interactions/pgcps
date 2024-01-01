@@ -39,13 +39,11 @@ export default factories.createCoreController('api::service-hour-log.service-hou
 
       entries = data.filter((entry: any) => entry.student?.email == user.email)
     } else {
-      let data: any;
-      data = await strapi.entityService.findMany('api::service-hour-log.service-hour-log', {
+      let data = await strapi.entityService.findMany('api::service-hour-log.service-hour-log', {
         populate: {
           student: {
             populate: {
-              profile: true,
-              select: ['grade']
+              profile: true
             }
           },
           school: {
@@ -54,7 +52,7 @@ export default factories.createCoreController('api::service-hour-log.service-hou
         }
       });
 
-      entries = data.filter((entry: any) => entry?.school?.id == user?.school?.id )
+      entries = (data as any[]).filter((entry: any) => entry?.school?.id == user?.school?.id )
     }
     return entries
   }
