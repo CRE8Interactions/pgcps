@@ -26,7 +26,7 @@ const SidebarContent = ({ onClick, session }: { onClick: Function, session: any 
     <Button as={NextLink} href="/dashboard/home" w="100%">
       Home
     </Button>
-    {session && session.accounType == "student" &&
+    {session && session.accountType == "student" &&
       < Button as={NextLink} href="/dashboard/new-service-hours" w="100%">
         Log Service Hours
       </Button>
