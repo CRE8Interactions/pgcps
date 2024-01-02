@@ -1,7 +1,7 @@
 "use server"
 
 import axios from 'axios';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '../auth/auth';
 import { getServerSession } from 'next-auth';
 
 const apiUrl = process.env.API_HOST;
@@ -30,7 +30,7 @@ export async function getSchools() {
   return res.data;
 }
 
-export async function signIn({ email, password }) {
+export async function signIn({ email, password }: any) {
   const res = await axios.post(`${apiUrl}/auth/local`, {
     identifier: email,
     password,
@@ -38,7 +38,7 @@ export async function signIn({ email, password }) {
   return res.data;
 }
 
-export async function signUp({ email, password, type, school, fullName }) {
+export async function signUp({ email, password, type, school, fullName }: any) {
   try {
     const res = await axios.post(`${apiUrl}/auth/local/register`, {
       username: email,
@@ -49,7 +49,7 @@ export async function signUp({ email, password, type, school, fullName }) {
       fullName
     });
     return res.data;
-  } catch (e) {
+  } catch (e: any) {
     return e.response.data.error
   }  
 }
@@ -59,7 +59,7 @@ export async function getMe() {
   return res.data;
 }
 
-export async function createEditProfile({ address, grade, studentNumber, uuid, phoneNumber }) {
+export async function createEditProfile({ address, grade, studentNumber, uuid, phoneNumber }: any) {
    const res = await axios.post(`${apiUrl}/profile/create-edit-profile`, {
     address, grade, studentNumber, uuid, phoneNumber
   });

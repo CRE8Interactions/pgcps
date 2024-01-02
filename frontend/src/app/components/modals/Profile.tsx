@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import StudentRegistration from '../forms/StudentRegistration';
 
-export default function ProfileModal({ user }) {
+export default function ProfileModal({ user }: any) {
   let isOpen = !user.profile;
   let onClose = () => console.log('Close')
   return (

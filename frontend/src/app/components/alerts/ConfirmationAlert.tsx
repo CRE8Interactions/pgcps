@@ -9,10 +9,10 @@ import {
   Button
 } from '@chakra-ui/react'
 
-import React from 'react'
+import { useRef } from 'react'
 
-export default function ConfirmationAlert({ isOpen, onOpen, onClose, setOnClose, setIsOpen, selectedHour }) {
-  const cancelRef = React.useRef()
+export default function ConfirmationAlert({ isOpen, onOpen, onClose, setOnClose, setIsOpen, selectedHour }: any) {
+  const cancelRef = useRef<any>()
   return (
     <>
       <AlertDialog
@@ -27,7 +27,7 @@ export default function ConfirmationAlert({ isOpen, onOpen, onClose, setOnClose,
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You'd like to approve {selectedHour?.hoursOfService} hours for {selectedHour?.student.fullName}.
+              Are you sure? You would like to approve {selectedHour?.hoursOfService} hours for {selectedHour?.student.fullName}.
             </AlertDialogBody>
 
             <AlertDialogFooter>

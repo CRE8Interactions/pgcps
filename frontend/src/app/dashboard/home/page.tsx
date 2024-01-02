@@ -1,4 +1,4 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/auth/auth';
 import { getServerSession } from 'next-auth';
 import { Box } from '@chakra-ui/react'
 import { Show, Button, SimpleGrid, Input } from '@chakra-ui/react'

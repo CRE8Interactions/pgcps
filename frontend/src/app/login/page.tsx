@@ -3,7 +3,7 @@ import { Button, VStack, Box, SimpleGrid, Heading, Container, Center } from '@ch
 import { Formik, Field, Form } from 'formik';
 import LoginForm from '../components/forms/LoginForm';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '../auth/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Page() {

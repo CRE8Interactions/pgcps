@@ -23,7 +23,7 @@ import ServiceHoursChart from "./ServiceHoursChart"
 import ConfirmationAlert from "./alerts/ConfirmationAlert"
 import { Link } from "@chakra-ui/react"
 
-export default function ServiceHoursTable({ hours, user, confirmation }) {
+export default function ServiceHoursTable({ hours, user, confirmation }: any) {
 
   const calculateSum = (arr: any) => {
     return arr.reduce((total: number, current: any) => {

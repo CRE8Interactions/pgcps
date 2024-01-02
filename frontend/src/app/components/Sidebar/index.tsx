@@ -50,13 +50,13 @@ const Sidebar = ({ isOpen, variant, onClose }: Props) => {
       <SidebarContent onClick={onClose} session={session} />
     </Box>
   ) : (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+    <Drawer isOpen={isOpen} placement="left" onClose={() => onClose}>
       <DrawerOverlay>
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>SPRY</DrawerHeader>
           <DrawerBody>
-            <SidebarContent onClick={onClose} />
+            <SidebarContent onClick={() => onClose} session={session} />
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>

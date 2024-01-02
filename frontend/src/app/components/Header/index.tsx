@@ -15,7 +15,8 @@ const Header = ({ showSidebarButton = true, onShowSidebar }: Props) => {
             icon={<ChevronRightIcon w={8} h={8} />}
             colorScheme="blackAlpha"
             variant="outline"
-            onClick={onShowSidebar}
+            onClick={() => onShowSidebar}
+            aria-label="icon"
           />
         )}
       </Box>

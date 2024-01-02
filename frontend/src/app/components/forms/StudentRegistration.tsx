@@ -24,6 +24,7 @@ interface Values {
   // lastName: string;
   // email: string;
   // dob: string;
+  uuid: string;
   studentNumber: string;
   grade: string;
   phoneNumber: string;
@@ -49,9 +50,17 @@ export default function StudentRegistration() {
           // firstName: '',
           // lastName: '',
           // email: '',
+          uuid: '',
           phoneNumber: '',
           grade: '',
-          studentNumber: ''
+          studentNumber: '',
+          school: '',
+          address: {
+            address1: '',
+            city: '',
+            state: '',
+            zipcode: '',
+          }
         }}
         onSubmit={async (
           values: Values,
@@ -99,7 +108,7 @@ export default function StudentRegistration() {
           <SimpleGrid columns={1} py="2">
             <Box>
               <Field name='phoneNumber'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber} isRequired>
                     <FormLabel>Phone Number</FormLabel>
                     <Input {...field} placeholder='Enter your phone number' />
@@ -113,7 +122,7 @@ export default function StudentRegistration() {
           <SimpleGrid columns={1}>
             <Box>
               <Field name='studentNumber' py="2">
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isInvalid={form.errors.studentNumber && form.touched.studentNumber} isRequired>
                     <FormLabel>Student Number</FormLabel>
                     <Input {...field} placeholder='Enter your student number' />
@@ -127,7 +136,7 @@ export default function StudentRegistration() {
           <SimpleGrid columns={{ sm: 1, md: 1 }} spacing={5} py="2">
             <Box>
               <Field name='grade'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isRequired>
                     <FormLabel>Choose your Grade</FormLabel>
                     <Select placeholder='Select your grade' onChange={(e) => setGrade(e.target.value)}>
@@ -142,7 +151,7 @@ export default function StudentRegistration() {
           <SimpleGrid columns={1} spacing={5} py="2">
             <Box>
               <Field name='address.address1'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isRequired>
                     <FormLabel>Mailing Address</FormLabel>
                     <Input {...field} placeholder='Enter your street address' />
@@ -156,7 +165,7 @@ export default function StudentRegistration() {
           <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={5} py="2">
             <Box>
               <Field name='address.city'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isRequired>
                     <FormLabel>City</FormLabel>
                     <Input {...field} placeholder='Enter your city' />
@@ -167,7 +176,7 @@ export default function StudentRegistration() {
             </Box>
             <Box>
               <Field name='address.state'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isRequired>
                     <FormLabel>State</FormLabel>
                     <Input {...field} placeholder='Enter your state' />
@@ -178,7 +187,7 @@ export default function StudentRegistration() {
             </Box>
             <Box>
               <Field name='address.zipcode'>
-                {({ field, form }) => (
+                {({ field, form }: any) => (
                   <FormControl isRequired>
                     <FormLabel>Zip</FormLabel>
                     <Input {...field} placeholder='Enter your zip' />

@@ -26,11 +26,14 @@ export default function Layout({
       <body>
         <>
           <Sidebar
+            // @ts-ignore
             variant={variants?.navigation}
             isOpen={isSidebarOpen}
             onClose={toggleSidebar}
           />
-          <Box ml={!variants?.navigationButton && 200}>
+          <Box
+            // @ts-ignore
+            ml={!variants?.navigationButton && 200}>
             <Header
               showSidebarButton={variants?.navigationButton}
               onShowSidebar={toggleSidebar}
