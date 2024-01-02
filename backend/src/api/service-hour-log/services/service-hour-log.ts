@@ -48,7 +48,5 @@ export default factories.createCoreService('api::service-hour-log.service-hour-l
         data: e
       }
     }
-
-    return entry
   }
 }));

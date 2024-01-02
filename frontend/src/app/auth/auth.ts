@@ -13,7 +13,6 @@ export const authOptions = {
         password: {}
       },
       async authorize(credentials, req) {
-        console.log('Credentials ', credentials)
         /**
          * This function is used to define if the user is authenticated or not.
          * If authenticated, the function should return an object contains the user data.
