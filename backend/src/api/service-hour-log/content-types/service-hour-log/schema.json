@@ -67,6 +67,11 @@
     },
     "approvalDate": {
       "type": "datetime"
+    },
+    "organization_approval": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization-approval.organization-approval"
     }
   }
 }

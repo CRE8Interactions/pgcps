@@ -19,7 +19,7 @@ export default {
    */
   bootstrap({ strapi }) {
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::access-request.access-request'],
+      models: ['plugin::users-permissions.user', 'api::access-request.access-request', 'api::service-hour-log.service-hour-log'],
       async afterCreate(event) {
         // afterCreate lifeclcyle
         const { result, params } = event;
@@ -35,6 +35,28 @@ export default {
         // listens for changes on access-request model
         if (event.model.singularName === 'access-request') {
           await strapi.service('api::utility.utility').sendMessage('spry_admins@pgcps.org', 'donotreply@pgcps.org', `New Counselor access requested`, `${result.requestor.fullName} has requested ${result.requestor.type} access to join ${result.school.name} to approve click <a href=${process.env.CLIENT_HOST}/request?code=${result.code}>Here</a>`)
+        }
+
+        // listens for changes on service hour log
+        if (event.model.singularName === 'service-hour-log') {
+          console.log('Log Cereated')
+          const entry = await strapi.db.query('api::organization-approval.organization-approval').create({
+            data: {
+              student: params.data.student,
+              service_hour_log: result,
+              organizerEmail: result['organizationContact'],
+              uuid: result['id'],
+            },
+          });
+
+          await strapi.db.query('api::service-hour-log.service-hour-log').update({
+            where: { id: result.id },
+            data: {
+              organization_approval: entry,
+            },
+          });
+
+          await strapi.service('api::utility.utility').sendMessage('spry_admins@pgcps.org', entry.organizerEmail, `Volunteer hours approval requested`, `${params.data.student.fullName} needs you to verify service hours to approve click <a href=${process.env.CLIENT_HOST}/hours_approval?code=${entry.uuid}>Here</a>`)
         }
       },
       async beforeCreate(event) {

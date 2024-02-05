@@ -12,12 +12,10 @@ services:
       NODE_ENV: development
     networks:
       - strapi
-  strapi:
-    container_name: strapi
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: strapi:latest
     restart: unless-stopped
     env_file: .env
     environment:
@@ -34,12 +32,12 @@ services:
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}
     volumes:
-      - ./backend/config:/opt/app/config
-      - ./backend/src:/opt/app/src
-      - ./backend/package.json:/opt/package.json
-      - ./backend/yarn.lock:/opt/yarn.lock
-      - ./.env:/opt/app/.env
-      - ./backend/public/uploads:/opt/app/public/uploads
+      - ./backend/config:/backend/app/config
+      - ./backend/src:/backend/app/src
+      - ./backend/package.json:/backend/package.json
+      - ./backend/yarn.lock:/backend/yarn.lock
+      - .env:/backend/app/.env
+      - ./backend/public/uploads:/backend/app/public/uploads
     ports:
       - "1337:1337"
     networks:

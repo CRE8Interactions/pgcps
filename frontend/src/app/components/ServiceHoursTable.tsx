@@ -24,7 +24,6 @@ import ConfirmationAlert from "./alerts/ConfirmationAlert"
 import { Link } from "@chakra-ui/react"
 
 export default function ServiceHoursTable({ hours, user, confirmation }: any) {
-
   const calculateSum = (arr: any) => {
     return arr.reduce((total: number, current: any) => {
       return total + current?.hoursOfService;
@@ -84,6 +83,7 @@ export default function ServiceHoursTable({ hours, user, confirmation }: any) {
                       <Th>Organization</Th>
                       <Th>Org Contact</Th>
                       <Th isNumeric>Hours</Th>
+                      <Th>Organization Approved</Th>
                       <Th>Status</Th>
                       {user && user.type == "counselor" &&
                         <Th></Th>
@@ -107,6 +107,7 @@ export default function ServiceHoursTable({ hours, user, confirmation }: any) {
                           </Link>
                         </Td>
                         <Td isNumeric>{hour.hoursOfService}</Td>
+                        <Td>{hour.organization_approval.approved == null ? 'waiting confirmation' : hour.organization_approval.approved}</Td>
                         <Td>{hour.status}</Td>
                         {user && user.type == "counselor" &&
                           <Td>

@@ -68,7 +68,7 @@ export default function StudentRegistration() {
         ) => {
           values['grade'] = grade;
           let response = await createEditProfile(values);
-          console.log('Res ', response)
+
           if (response.uuid) {
             setSubmitting(false);
             router.push('/dashboard/home');

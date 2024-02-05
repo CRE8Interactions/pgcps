@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
-    "@strapi/plugin-i18n": "4.15.0",
-    "@strapi/plugin-users-permissions": "4.15.0",
-    "@strapi/provider-email-nodemailer": "^4.16.0",
-    "@strapi/strapi": "4.15.0",
+    "@strapi/plugin-i18n": "4.19.1",
+    "@strapi/plugin-users-permissions": "4.19.1",
+    "@strapi/provider-email-nodemailer": "^4.19.1",
+    "@strapi/strapi": "4.19.1",
     "moment": "^2.29.4",
     "pg": "8.8.0",
-    "strapi-plugin-paper-trail": "^0.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "strapi-plugin-paper-trail": "^0.4.0",
+    "styled-components": "^5.3.11",
     "uuid": "^9.0.1"
   },
   "author": {

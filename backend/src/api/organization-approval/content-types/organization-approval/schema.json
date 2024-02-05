@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_approvals",
+  "info": {
+    "singularName": "organization-approval",
+    "pluralName": "organization-approvals",
+    "displayName": "organizationApproval",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "service_hour_log": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::service-hour-log.service-hour-log"
+    },
+    "organizerEmail": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "approved": {
+      "type": "boolean"
+    }
+  }
+}

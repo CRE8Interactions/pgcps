@@ -20,7 +20,7 @@ export default factories.createCoreController('api::service-hour-log.service-hou
       },
       populate: {
         school: true,
-        role: true
+        role: true,
       }
     })
 
@@ -33,7 +33,8 @@ export default factories.createCoreController('api::service-hour-log.service-hou
         populate: { 
           student: {
             filters: { id: user.id }
-          }
+          },
+          organization_approval: true,
         },
       });
 
@@ -48,7 +49,8 @@ export default factories.createCoreController('api::service-hour-log.service-hou
           },
           school: {
             filters: { id: user.school.id}
-          }
+          },
+          organization_approval: true,
         }
       });
 

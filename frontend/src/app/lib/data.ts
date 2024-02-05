@@ -90,3 +90,8 @@ export async function approveHour(hourId: string) {
   const res = await axios.post(`${apiUrl}/organizations/approve-hour`, {hourId});
   return res.data;
 }
+
+export async function orgApproval(id: string) {
+  const res = await axios.get(`${apiUrl}/organization-approvals/approve?id=${id}`);
+  return res.data;
+}
